@@ -2,6 +2,10 @@
 #
 .DS_Store
 
+# Ignore everything under /Users/pavankumararepu/ except /Users/pavankumararepu/Technology/DataStructures
+/Users/pavankumararepu/Technology/*
+!/Users/pavankumararepu/Technology/MobileApps/ReactNative/ExpensTracker
+
 # Xcode
 #
 build/
