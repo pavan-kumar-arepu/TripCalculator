@@ -7,12 +7,10 @@
 
 import React from 'react';
 import {Text, View} from 'react-native';
+import AppNavigation from './navigation/appNavigation';
+import HomeScreen from './screens/HomeScreen';
 
 function App() {
-  return (
-    <View style={{marginTop: 40}} className="bg-red-400">
-      <Text>Hello World Pavan</Text>
-    </View>
-  );
+  return <AppNavigation />;
 }
 export default App;
