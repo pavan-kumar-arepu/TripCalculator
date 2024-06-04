@@ -3,6 +3,28 @@ import React from 'react';
 import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
 
+const items = [
+  {
+    id: 1,
+    place: 'Machilipatnam',
+    country: 'India',
+  },
+  {
+    id: 2,
+    place: 'Hyderabad',
+    country: 'India',
+  },
+  {
+    id: 3,
+    place: 'Bangalore',
+    country: 'India',
+  },
+  {
+    id: 4,
+    place: 'Pune',
+    country: 'India',
+  },
+];
 export default function HomeScreen() {
   return (
     <ScreenWrapper className="flex-1">
