@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
+import randomImage from '../assets/images/randomImage';
 
 const items = [
   {
@@ -31,13 +32,23 @@ const items = [
     place: 'Pune',
     country: 'India',
   },
+  {
+    id: 5,
+    place: 'Delhi',
+    country: 'India',
+  },
+  {
+    id: 6,
+    place: 'Goa',
+    country: 'India',
+  },
 ];
 export default function HomeScreen() {
   return (
     <ScreenWrapper className="flex-1">
       <View className="flex-row justify-between items-center p-4">
         {/* Top Title */}
-        <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>
+        <Text className={`${colors.heading} font-bold text-3xl`}>
           Trip Tracker
         </Text>
         {/* Logout Button */}
@@ -59,10 +70,13 @@ export default function HomeScreen() {
           </Text>
           {/* Add Trips*/}
           <TouchableOpacity className="p-2 px-3 bg-white border border-gray-200 roundded-full">
-            <Text className={colors.heading}>Add Trip</Text>
+            <Text className={colors.heading}>Add Trips</Text>
           </TouchableOpacity>
         </View>
-        <View>
+        <View style={{height: 20}}>
+          <Text></Text>
+        </View>
+        <View style={{height: 300}}>
           <FlatList
             data={items}
             numColumns={2}
@@ -77,11 +91,15 @@ export default function HomeScreen() {
                 <TouchableOpacity className="bg-white p-3 rounded-2xl mb-3 showdow-sm">
                   <View>
                     <Image
-                      source={require('../assets/images/1.png')}
+                      // source={require('../assets/images/1.png')}
+                      source={randomImage()}
                       className="w-36 h-60 mb-2"
                     />
                     <Text className={`${colors.heading} font-bold`}>
                       {item.place}
+                    </Text>
+                    <Text className={`${colors.heading} font-bold`}>
+                      {item.country}
                     </Text>
                   </View>
                 </TouchableOpacity>
