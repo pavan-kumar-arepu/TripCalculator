@@ -1,4 +1,11 @@
-import {View, Text, Touchable, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  Image,
+  FlatList,
+} from 'react-native';
 import React from 'react';
 import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
@@ -52,8 +59,35 @@ export default function HomeScreen() {
           </Text>
           {/* Add Trips*/}
           <TouchableOpacity className="p-2 px-3 bg-white border border-gray-200 roundded-full">
-            <Text className={colors.heading}>Logout</Text>
+            <Text className={colors.heading}>Add Trip</Text>
           </TouchableOpacity>
+        </View>
+        <View>
+          <FlatList
+            data={items}
+            numColumns={2}
+            keyExtractor={items => items.id}
+            showsVerticalScrollIndicator={true}
+            columnWrapperStyle={{
+              justifyContent: 'space-between',
+            }}
+            className="mx-1"
+            renderItem={({item}) => {
+              return (
+                <TouchableOpacity className="bg-white p-3 rounded-2xl mb-3 showdow-sm">
+                  <View>
+                    <Image
+                      source={require('../assets/images/1.png')}
+                      className="w-36 h-60 mb-2"
+                    />
+                    <Text className={`${colors.heading} font-bold`}>
+                      {item.place}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
         </View>
       </View>
     </ScreenWrapper>
