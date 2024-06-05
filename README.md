@@ -2,8 +2,11 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 #  Screenshots:
 
-![alt text](Signin.png)
-![alt text](Signup.png)
+![alt text](Signup-1.png)
+![alt text](Signin-1.png)
+![alt text](Home.png)
+![alt text](AddTrip.png)
+![alt text](AddExpense.png)
 
 # Getting Started
 
