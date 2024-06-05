@@ -1,12 +1,16 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-#  Screenshots:
+#  App Screenshots:
 
 ![alt text](Signup-1.png)
 ![alt text](Signin-1.png)
 ![alt text](Home.png)
 ![alt text](AddTrip.png)
 ![alt text](AddExpense.png)
+
+#  Firebase Screenshots:
+![alt text](FirebaseAuth.png)
+![alt text](Firestore.png)
 
 # Getting Started
 
