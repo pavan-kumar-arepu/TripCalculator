@@ -76,7 +76,7 @@ export default function TripExpensesScreen(props) {
             </Text>
             {/* Add Trips*/}
             <TouchableOpacity
-              onPress={() => navigation.navigate('AddTrip')}
+              onPress={() => navigation.navigate('AddExpense')}
               className="p-2 px-3 bg-white border border-gray-200 roundded-full">
               <Text className={colors.heading}>Add Expense</Text>
             </TouchableOpacity>
