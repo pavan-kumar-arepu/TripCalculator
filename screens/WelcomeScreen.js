@@ -11,14 +11,14 @@ export default function WelcomeScreen() {
       <View className="h-full flex justify-around">
         <View className="flex-row justify-center mt-10">
           <Image
-            source={require('../assets/images/welcome.gif')}
+            source={require('../assets/images/3.png')}
             className="h-96 w-96 shadow"
           />
         </View>
         <View className="mx-5 mb-20">
           <Text
             className={`text-center font-bold text-4xl ${colors.heading} mb-10`}>
-            Trip Tracker
+            Travel Expense
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate('Login')}

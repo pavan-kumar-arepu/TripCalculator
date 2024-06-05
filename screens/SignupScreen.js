@@ -4,20 +4,41 @@ import ScreenWrapper from '../components/screenWrapper';
 import BackButton from '../components/backButton';
 import {colors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
+import Snackbar from 'react-native-snackbar';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../config/firebase';
+import {useSelector, useDispatch} from 'react-redux';
+import {setUserLoading} from '../redux/slices/user';
+import Loading from '../components/loading';
 
 export default function SignUpScreen() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const {userLoading} = useSelector(state => state.user);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (email && password) {
       // Proceed to save data to FireStore
-      navigation.goBack();
-      navigation.navigate('Home');
+      try {
+        dispatch(setUserLoading(true));
+        await createUserWithEmailAndPassword(auth, email, password);
+        dispatch(setUserLoading(false));
+      } catch (e) {
+        dispatch(setUserLoading(false));
+        Snackbar.show({
+          text: e.message,
+          backgroundColor: 'red',
+        });
+      }
     } else {
       // Show Error
+      Snackbar.show({
+        text: 'Email and Password are required!',
+        backgroundColor: 'red',
+      });
     }
   };
   return (
@@ -33,7 +54,7 @@ export default function SignUpScreen() {
           <View className="flex-row justify-center my-3 mt-5">
             <Image
               className="h-72 w-72"
-              source={require('../assets/images/login.png')}
+              source={require('../assets/images/signup.png')}
             />
           </View>
           <View className="space-y-2 mx-2">
@@ -60,15 +81,19 @@ export default function SignUpScreen() {
         </View>
 
         <View>
-          <TouchableOpacity
-            onPress={handleSignup}
-            style={{backgroundColor: colors.button}}
-            className="my-6 rounded-full p-3 shadow-sm mx-2">
-            <Text className="text-center text-white text-lg font-bold">
-              {' '}
-              Sign Up{' '}
-            </Text>
-          </TouchableOpacity>
+          {userLoading ? (
+            <Loading />
+          ) : (
+            <TouchableOpacity
+              onPress={handleSignup}
+              style={{backgroundColor: colors.button}}
+              className="my-6 rounded-full p-3 shadow-sm mx-2">
+              <Text className="text-center text-white text-lg font-bold">
+                {' '}
+                Sign Up{' '}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </ScreenWrapper>

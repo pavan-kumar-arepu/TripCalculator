@@ -11,11 +11,15 @@ import AppNavigation from './navigation/appNavigation';
 import HomeScreen from './screens/HomeScreen';
 import {Provider} from 'react-redux';
 import {store} from './redux/store';
+import AuthStateListener from './config/authState';
 
-const App = () => (
-  <Provider store={store}>
-    <AppNavigation />
-  </Provider>
-);
+const App = () => {
+  return (
+    <Provider store={store}>
+      {/* <AuthStateListener /> */}
+      <AppNavigation />
+    </Provider>
+  );
+};
 
 export default App;

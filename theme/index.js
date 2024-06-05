@@ -1,6 +1,7 @@
 export const colors = {
   heading: 'text-gray-700',
   button: '#50c878',
+  expenseCell: '#8dd278',
 };
 
 export const categoryBG = {

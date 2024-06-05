@@ -4,20 +4,40 @@ import ScreenWrapper from '../components/screenWrapper';
 import BackButton from '../components/backButton';
 import {colors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
+import Snackbar from 'react-native-snackbar';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../config/firebase';
+import Loading from '../components/loading';
+import {setUserLoading} from '../redux/slices/user';
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
+  const {userLoading} = useSelector(state => state.user);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email && password) {
       // Proceed to save data to FireStore
-      navigation.goBack();
-      navigation.navigate('Home');
+      try {
+        dispatch(setUserLoading(true));
+        await signInWithEmailAndPassword(auth, email, password);
+        dispatch(setUserLoading(false));
+        navigation.navigate('Home');
+      } catch (e) {
+        dispatch(setUserLoading(false));
+        Snackbar.show({
+          text: e.message,
+          backgroundColor: 'red',
+        });
+      }
     } else {
-      // Show Error
+      Snackbar.show({
+        text: 'Email and Password are required!',
+        backgroundColor: 'red',
+      });
     }
   };
   return (
@@ -60,15 +80,19 @@ export default function LoginScreen() {
         </View>
 
         <View>
-          <TouchableOpacity
-            onPress={handleLogin}
-            style={{backgroundColor: colors.button}}
-            className="my-6 rounded-full p-3 shadow-sm mx-2">
-            <Text className="text-center text-white text-lg font-bold">
-              {' '}
-              Sign In{' '}
-            </Text>
-          </TouchableOpacity>
+          {userLoading ? (
+            <Loading />
+          ) : (
+            <TouchableOpacity
+              onPress={handleLogin}
+              style={{backgroundColor: colors.button}}
+              className="my-6 rounded-full p-3 shadow-sm mx-2">
+              <Text className="text-center text-white text-lg font-bold">
+                {' '}
+                Sign In{' '}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </ScreenWrapper>

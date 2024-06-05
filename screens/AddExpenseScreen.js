@@ -83,7 +83,6 @@ export default function AddExpenseScreen() {
             </View>
           </View>
         </View>
-
         <View>
           <TouchableOpacity
             onPress={handleAddExpenses}

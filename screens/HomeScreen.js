@@ -12,6 +12,10 @@ import {colors} from '../theme';
 import randomImage from '../assets/images/randomImage';
 import EmptyList from '../components/emptyList';
 import {useNavigation} from '@react-navigation/native';
+import {signOut} from 'firebase/auth';
+import {auth} from '../config/firebase';
+import {useDispatch} from 'react-redux';
+import {setUser} from '../redux/slices/user';
 
 const items = [
   {
@@ -37,16 +41,29 @@ const items = [
 ];
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // Clear user state after sign-out
+      dispatch(setUser(null));
+      navigation.navigate('Welcome');
+      console.log('User signed out');
+    } catch (error) {
+      console.error('Error signing out: ', error);
+    }
+  };
 
   return (
     <ScreenWrapper className="flex-1">
       <View className="flex-row justify-between items-center p-4">
         {/* Top Title */}
-        <Text className={`${colors.heading} font-bold text-3xl`}>
-          Trip Tracker
-        </Text>
+        <Text className={`${colors.heading} font-bold text-3xl`}>Welcome</Text>
         {/* Logout Button */}
-        <TouchableOpacity className="p-2 px-3 bg-white border border-gray-200 roundded-full">
+        <TouchableOpacity
+          onPress={handleLogout}
+          className="p-2 px-3 bg-white border border-gray-200 roundded-full">
           <Text className={colors.heading}>Logout</Text>
         </TouchableOpacity>
       </View>

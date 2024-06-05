@@ -4,21 +4,50 @@ import ScreenWrapper from '../components/screenWrapper';
 import BackButton from '../components/backButton';
 import {colors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
+import Loading from '../components/loading';
+import Snackbar from 'react-native-snackbar';
+import {tripsCollection} from '../config/firebase';
+import {useSelector} from 'react-redux';
+import {addDoc} from 'firebase/firestore';
 
 export default function AddTripScreen() {
   const [place, setPlace] = useState();
   const [country, setCountry] = useState();
+  const {user} = useSelector(state => state.user);
 
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
-  const handleAddTrip = () => {
+  const handleAddTrip = async () => {
+    console.log(user);
     if (place && country) {
-      // Proceed to save data to FireStore
-      navigation.navigate('Home');
+      setLoading(true);
+      try {
+        const doc = await addDoc(tripsCollection, {
+          place,
+          country,
+          userId: user.uid,
+        });
+        setLoading(false);
+        if (doc && doc.id) {
+          navigation.goBack();
+        }
+      } catch (error) {
+        console.error('Error adding document: ', error);
+        setLoading(false);
+        Snackbar.show({
+          text: 'Failed to add trip. Please try again!',
+          backgroundColor: 'red',
+        });
+      }
     } else {
-      // Show Error
+      Snackbar.show({
+        text: 'Place and country are required!',
+        backgroundColor: 'red',
+      });
     }
   };
+
   return (
     <ScreenWrapper>
       <View className="flex justify-between h-full mx-4">
@@ -38,7 +67,7 @@ export default function AddTripScreen() {
           <View className="space-y-2 mx-2">
             <Text className={`${colors.heading} text-lg font-bold`}>
               {' '}
-              Where on Earth?
+              Which place you visited?
             </Text>
             <TextInput
               value={place}
@@ -47,7 +76,7 @@ export default function AddTripScreen() {
             />
             <Text className={`${colors.heading} text-lg font-bold`}>
               {' '}
-              Which Country?
+              From which country?
             </Text>
             <TextInput
               value={country}
@@ -58,15 +87,19 @@ export default function AddTripScreen() {
         </View>
 
         <View>
-          <TouchableOpacity
-            onPress={handleAddTrip}
-            style={{backgroundColor: colors.button}}
-            className="my-6 rounded-full p-3 shadow-sm mx-2">
-            <Text className="text-center text-white text-lg font-bold">
-              {' '}
-              Add Trip{' '}
-            </Text>
-          </TouchableOpacity>
+          {loading ? (
+            <Loading />
+          ) : (
+            <TouchableOpacity
+              onPress={handleAddTrip}
+              style={{backgroundColor: colors.button}}
+              className="my-6 rounded-full p-3 shadow-sm mx-2">
+              <Text className="text-center text-white text-lg font-bold">
+                {' '}
+                Add Trip{' '}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </ScreenWrapper>
