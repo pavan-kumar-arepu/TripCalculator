@@ -5,13 +5,13 @@ import BackButton from '../components/backButton';
 import {colors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
 
-export default function LoginScreen() {
+export default function SignUpScreen() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const navigation = useNavigation();
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     if (email && password) {
       // Proceed to save data to FireStore
       navigation.goBack();
@@ -25,7 +25,7 @@ export default function LoginScreen() {
       <View className="flex justify-between h-full mx-4">
         <View className="relative mt-2">
           <Text className={`${colors.heading} text-xl font-bold text-center`}>
-            Sign In
+            Sign Up
           </Text>
           <View className="absolute top-0 left-0">
             <BackButton />
@@ -61,12 +61,12 @@ export default function LoginScreen() {
 
         <View>
           <TouchableOpacity
-            onPress={handleLogin}
+            onPress={handleSignup}
             style={{backgroundColor: colors.button}}
             className="my-6 rounded-full p-3 shadow-sm mx-2">
             <Text className="text-center text-white text-lg font-bold">
               {' '}
-              Sign In{' '}
+              Sign Up{' '}
             </Text>
           </TouchableOpacity>
         </View>
