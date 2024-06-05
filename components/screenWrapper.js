@@ -7,5 +7,5 @@ export default function ScreenWrapper({children}) {
     : Platform.OS == 'ios'
     ? 30
     : 0;
-  return <View style={{paddingTop: statusBarHeight}}>{children}</View>;
+  return <View style={{paddingTop: 0}}>{children}</View>;
 }

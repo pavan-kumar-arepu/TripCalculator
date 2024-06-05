@@ -34,16 +34,6 @@ const items = [
     place: 'Pune',
     country: 'India',
   },
-  {
-    id: 5,
-    place: 'Delhi',
-    country: 'India',
-  },
-  {
-    id: 6,
-    place: 'Goa',
-    country: 'India',
-  },
 ];
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -97,7 +87,9 @@ export default function HomeScreen() {
             className="mx-1"
             renderItem={({item}) => {
               return (
-                <TouchableOpacity className="bg-white p-3 rounded-2xl mb-3 showdow-sm">
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('TripExpense', {...item})}
+                  className="bg-white p-3 rounded-2xl mb-3 showdow-sm">
                   <View>
                     <Image source={randomImage()} className="w-36 h-60 mb-2" />
                     <Text className={`${colors.heading} font-bold`}>
