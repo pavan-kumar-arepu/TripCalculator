@@ -16,7 +16,6 @@ import {signOut} from 'firebase/auth';
 import {auth, tripsCollection} from '../config/firebase';
 import {useDispatch, useSelector} from 'react-redux';
 import {setUser} from '../redux/slices/user';
-// import {getDocs, where, query} from 'firebase/firestore'; // Proper import
 import {isFulfilled} from '@reduxjs/toolkit';
 import {useIsFocused} from '@react-navigation/native'; // Correct import for useIsFocused
 import {getDocs, query as firestoreQuery, where} from 'firebase/firestore'; // Proper import
