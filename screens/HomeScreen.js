@@ -89,12 +89,14 @@ export default function HomeScreen() {
         <View style={{height: 20}}>
           <Text></Text>
         </View>
-        <View style={{height: 300}}>
+        <View style={{height: 400}}>
           <FlatList
-            data={items}
+            data={[]}
             numColumns={2}
             ListEmptyComponent={
-              <EmptyList message={'You have not added any trips'} />
+              <EmptyList
+                message={'You do not have any trips yet, its time to start!'}
+              />
             }
             keyExtractor={items => items.id}
             showsVerticalScrollIndicator={true}

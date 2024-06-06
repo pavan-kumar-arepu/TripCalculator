@@ -11,7 +11,7 @@ export default function WelcomeScreen() {
       <View className="h-full flex justify-around">
         <View className="flex-row justify-center mt-10">
           <Image
-            source={require('../assets/images/3.png')}
+            source={require('../assets/images/welcomenew.png')}
             className="h-96 w-96 shadow"
           />
         </View>
