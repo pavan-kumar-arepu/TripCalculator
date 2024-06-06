@@ -5,6 +5,7 @@ import BackButton from '../components/backButton';
 import {colors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
 import {categories} from '../constants';
+import Snackbar from 'react-native-snackbar';
 
 export default function AddExpenseScreen() {
   const [title, setTitle] = useState();
@@ -24,6 +25,12 @@ export default function AddExpenseScreen() {
     } else {
       // Show Error
       // console.log('title', title);
+      console.error('Error adding document: ', error);
+      // setLoading(false);
+      Snackbar.show({
+        text: 'Failed to add trip. Please try again!',
+        backgroundColor: 'red',
+      });
     }
   };
   return (

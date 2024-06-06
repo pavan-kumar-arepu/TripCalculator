@@ -6,49 +6,53 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
 import randomImage from '../assets/images/randomImage';
 import EmptyList from '../components/emptyList';
 import {useNavigation} from '@react-navigation/native';
 import {signOut} from 'firebase/auth';
-import {auth} from '../config/firebase';
-import {useDispatch} from 'react-redux';
+import {auth, tripsCollection} from '../config/firebase';
+import {useDispatch, useSelector} from 'react-redux';
 import {setUser} from '../redux/slices/user';
+// import {getDocs, where, query} from 'firebase/firestore'; // Proper import
+import {isFulfilled} from '@reduxjs/toolkit';
+import {useIsFocused} from '@react-navigation/native'; // Correct import for useIsFocused
+import {getDocs, query as firestoreQuery, where} from 'firebase/firestore'; // Proper import
 
-const items = [
-  {
-    id: 1,
-    place: 'Machilipatnam',
-    country: 'India',
-  },
-  {
-    id: 2,
-    place: 'Hyderabad',
-    country: 'India',
-  },
-  {
-    id: 3,
-    place: 'Bangalore',
-    country: 'India',
-  },
-  {
-    id: 4,
-    place: 'Pune',
-    country: 'India',
-  },
-];
 export default function HomeScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const {user} = useSelector(state => state.user);
+  const [trips, setTrips] = useState([]);
+  const isFocused = useIsFocused();
+
+  const fetchTrips = async () => {
+    const tripsQuery = firestoreQuery(
+      tripsCollection,
+      where('userId', '==', user.uid),
+    );
+    const querySnapshot = await getDocs(tripsQuery);
+
+    let data = [];
+    querySnapshot.forEach(doc => {
+      console.log('APK: Document', doc.data());
+      data.push({...doc.data(), id: doc.id});
+    });
+    setTrips(data);
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      fetchTrips();
+    }
+  }, [isFocused]);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       // Clear user state after sign-out
-      dispatch(setUser(null));
-      navigation.navigate('Welcome');
       console.log('User signed out');
     } catch (error) {
       console.error('Error signing out: ', error);
@@ -91,7 +95,7 @@ export default function HomeScreen() {
         </View>
         <View style={{height: 400}}>
           <FlatList
-            data={[]}
+            data={trips}
             numColumns={2}
             ListEmptyComponent={
               <EmptyList

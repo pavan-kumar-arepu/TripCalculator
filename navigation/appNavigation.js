@@ -39,7 +39,6 @@ export default function AppNavigation() {
     const unsubscribe = onAuthStateChanged(auth, newUser => {
       console.log('APK: onAuthStateChanged Called');
       if (newUser) {
-        console.log('APK: User Full Details ', newUser);
         console.log('APK: User UID ', newUser.uid);
         console.log('APK: User email ', newUser.email);
         console.log('APK: User displayName ', newUser.displayName);
@@ -50,16 +49,10 @@ export default function AppNavigation() {
         };
         dispatch(setUser(userData));
       } else {
-        console.log('APK: User Full Details ', newUser);
-        console.log('APK: User UID ', newUser.uid);
-        console.log('APK: User email ', newUser.email);
-        console.log('APK: User displayName ', newUser.displayName);
         dispatch(setUser(null));
       }
       dispatch(setUserLoading(false));
     });
-
-    // dispatch(setUserLoading(true));
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
