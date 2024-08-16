@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "title": "Learn React Native",
+    "description": "Understand the basics of React Native and how to create a new project."
+  },
+  {
+    "id": "2",
+    "title": "Set Up Development Environment",
+    "description": "Install Node.js, React Native CLI, and configure Android Studio or Xcode."
+  },
+  {
+    "id": "3",
+    "title": "Explore React Native Components",
+    "description": "Familiarize yourself with components like View, Text, Button, and FlatList."
+  },
+  {
+    "id": "4",
+    "title": "Understand State and Props",
+    "description": "Learn how to manage state and pass data between components using props."
+  },
+  {
+    "id": "5",
+    "title": "Build a To-Do App",
+    "description": "Create a simple to-do app to practice handling user input and updating state."
+  },
+  {
+    "id": "6",
+    "title": "Work with APIs",
+    "description": "Learn how to fetch data from an API and display it in your React Native app."
+  },
+  {
+    "id": "7",
+    "title": "Implement Navigation",
+    "description": "Set up navigation between different screens using React Navigation."
+  },
+  {
+    "id": "8",
+    "title": "Style Your App",
+    "description": "Apply styles to your components using StyleSheet and Flexbox layout."
+  },
+  {
+    "id": "9",
+    "title": "Handle User Input",
+    "description": "Learn how to handle forms and user input using TextInput and KeyboardAvoidingView."
+  },
+  {
+    "id": "10",
+    "title": "Deploy Your App",
+    "description": "Prepare your app for deployment on the App Store or Google Play Store."
+  }
+]
