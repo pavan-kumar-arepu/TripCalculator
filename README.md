@@ -9,8 +9,6 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 ![alt text](AddExpense.png)
 
 #  Firebase Screenshots
-
-![Simulator Screen Shot - iPhone 14 Pro - 2024-08-17 at 22 09 24](https://github.com/user-attachments/assets/68ab540a-5f47-49a6-85c5-2d56dd2af37d)
 :
 ![alt text](FirebaseAuth.png)
 ![alt text](Firestore.png)
